@@ -1178,6 +1178,18 @@ class Api
 
         return $this->post('setWebhook', compact('url'));
     }
+    
+    /**
+     * Retrieves webhook info
+     *
+     * @throws TelegramSDKException
+     *
+     * @return TelegramResponse
+     */
+    public function getWebhookInfo()
+    {
+        return $this->post('getWebhookInfo');
+    }
 
     /**
      * Use this method to receive incoming updates using long polling.
@@ -1309,20 +1321,21 @@ class Api
     /**
      * Processes Inbound Commands.
      *
-     * @param bool $webhook
+     * @param bool  $webhook
+     * @param array $params
      *
      * @return Update|Update[]
      */
-    public function commandsHandler($webhook = false)
+    public function commandsHandler($webhook = false, array $params = [])
     {
         if ($webhook) {
-            $update = $this->getWebhookUpdates();
+            $update = $this->getWebhookUpdate();
             $this->processCommand($update);
 
             return $update;
         }
 
-        $updates = $this->getUpdates();
+        $updates = $this->getUpdates($params);
         $highestId = -1;
 
         foreach ($updates as $update) {
