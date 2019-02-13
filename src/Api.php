@@ -99,15 +99,23 @@ class Api
 		if (!$this->accessToken) {
 			throw new TelegramSDKException('Required "token" not supplied in config and could not find fallback environment variable "'.static::BOT_TOKEN_ENV_NAME.'"');
 		}
-
+		
 		if (isset($async)) {
 			$this->setAsyncRequest($async);
 		}
-
-		$this->client = new TelegramClient($httpClientHandler);
+		
 		$this->commandBus = new CommandBus($this);
 	}
-
+	
+	public function connect () {
+		$this->client = new TelegramClient($httpClientHandler);
+	}
+	private function connectIfNot () {
+		if ( !$this->client ) {
+			$this->connect();
+		}
+	}
+	
 	/**
 	 * Invoke Bots Manager.
 	 *
