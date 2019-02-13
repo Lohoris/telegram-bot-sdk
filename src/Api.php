@@ -1457,17 +1457,20 @@ class Api
 	 */
 	protected function post($endpoint, array $params = [], $fileUpload = false)
 	{
+		$this->connectIfNot();
+		
 		if ($fileUpload) {
 			$params = ['multipart' => $params];
-		} else {
-
+		}
+		else {
+			
 			if (array_key_exists('reply_markup', $params)) {
 				$params['reply_markup'] = (string)$params['reply_markup'];
 			}
-
+			
 			$params = ['form_params' => $params];
 		}
-
+		
 		return $this->sendRequest(
 			'POST',
 			$endpoint,
