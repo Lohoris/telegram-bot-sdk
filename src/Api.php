@@ -104,10 +104,18 @@ class Api
             $this->setAsyncRequest($async);
         }
 
-        $this->client = new TelegramClient($httpClientHandler);
         $this->commandBus = new CommandBus($this);
     }
-
+	
+	public function connect () {
+		$this->client = new TelegramClient($httpClientHandler);
+	}
+	private function connectIfNot () {
+		if ( !$this->client ) {
+			$this->connect();
+		}
+	}
+	
     /**
      * Invoke Bots Manager.
      *
