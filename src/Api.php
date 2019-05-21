@@ -86,10 +86,10 @@ class Api
 	 * Instantiates a new Telegram super-class object.
 	 *
 	 *
-	 * @param string			  $token					  The Telegram Bot API Access Token.
-	 * @param bool				$async					  (Optional) Indicates if the request to Telegram
-	 *														will be asynchronous (non-blocking).
-	 * @param HttpClientInterface $httpClientHandler		  (Optional) Custom HTTP Client Handler.
+	 * @param string               $token               The Telegram Bot API Access Token.
+	 * @param bool                 $async               (Optional) Indicates if the request to Telegram
+	 *                                                  will be asynchronous (non-blocking).
+	 * @param HttpClientInterface  $httpClientHandler   (Optional) Custom HTTP Client Handler.
 	 *
 	 * @throws TelegramSDKException
 	 */
