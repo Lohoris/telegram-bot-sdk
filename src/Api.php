@@ -1445,6 +1445,8 @@ class Api
      */
     protected function post($endpoint, array $params = [], $fileUpload = false)
     {
+		$this->connectIfNot();
+		
         if ($fileUpload) {
             $params = ['multipart' => $params];
         } else {
