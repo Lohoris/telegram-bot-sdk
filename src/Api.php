@@ -93,7 +93,7 @@ class Api
      *
      * @throws TelegramSDKException
      */
-    public function __construct($token = null, $async = false, $httpClientHandler = null)
+    public function __construct($token = null, $async = false)
     {
         $this->accessToken = isset($token) ? $token : getenv(static::BOT_TOKEN_ENV_NAME);
         if (!$this->accessToken) {
@@ -107,7 +107,7 @@ class Api
         $this->commandBus = new CommandBus($this);
     }
 	
-	public function connect () {
+	public function connect ( $httpClientHandler=NULL ) {
 		$this->client = new TelegramClient($httpClientHandler);
 	}
 	private function connectIfNot () {
